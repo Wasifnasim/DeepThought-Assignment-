@@ -1,207 +1,284 @@
 [
-  {
-    "id": "start",
-    "type": "start",
-    "text": "Good evening. Let’s take a few minutes to reflect on your day.",
-    "next": "q_intro"
-  },
-  {
-    "id": "q_intro",
-    "type": "question",
-    "text": "When you think about today, what stands out most?",
-    "options": [
-      { "text": "Productive", "signal": "mood:high" },
-      { "text": "Challenging", "signal": "mood:low" },
-      { "text": "Mixed", "signal": "mood:neutral" },
-      { "text": "Frustrating", "signal": "mood:low" }
-    ],
-    "next": "bridge_1"
-  },
-
-  {
-    "id": "bridge_1",
-    "type": "bridge",
-    "text": "Let’s start by looking at how you handled what came your way today.",
-    "next": "q1_1"
-  },
-
-  {
-    "id": "q1_1",
-    "type": "question",
-    "text": "When something didn’t go as expected, what was your first instinct?",
-    "options": [
-      { "text": "Figure out what I could adjust", "signal": "axis1:internal" },
-      { "text": "Wait and see how things unfold", "signal": "axis1:external" },
-      { "text": "Feel frustrated by the situation", "signal": "axis1:external" },
-      { "text": "Look for another way forward", "signal": "axis1:internal" }
-    ],
-    "next": "q1_2"
-  },
-  {
-    "id": "q1_2",
-    "type": "question",
-    "text": "Thinking about your main task today, what shaped the outcome the most?",
-    "options": [
-      { "text": "The choices and effort I put in", "signal": "axis1:internal" },
-      { "text": "Changes in priorities or circumstances", "signal": "axis1:external" },
-      { "text": "A mix, but I drove what I could", "signal": "axis1:internal" },
-      { "text": "Dependence on others or delays", "signal": "axis1:external" }
-    ],
-    "next": "dec_axis1"
-  },
-  {
-    "id": "dec_axis1",
-    "type": "decision",
-    "rules": [
-      {
-        "condition": "axis1:internal >= axis1:external",
-        "next": "ref1_int"
-      },
-      {
-        "condition": "default",
-        "next": "ref1_ext"
-      }
-    ]
-  },
-  {
-    "id": "ref1_int",
-    "type": "reflection",
-    "text": "You described today as '{q_intro.answer}'. Even with that, you stayed engaged with what you could influence. That ability to act within constraints is what builds real progress.",
-    "next": "bridge_2"
-  },
-  {
-    "id": "ref1_ext",
-    "type": "reflection",
-    "text": "You described today as '{q_intro.answer}'. It seems like a lot felt outside your control. Even then, there were small decisions you made along the way — those are worth noticing.",
-    "next": "bridge_2"
-  },
-
-  {
-    "id": "bridge_2",
-    "type": "bridge",
-    "text": "Now that you’ve looked at how you handled things, let’s shift to what you brought into the work itself.",
-    "next": "q2_1"
-  },
-
-  {
-    "id": "q2_1",
-    "type": "question",
-    "text": "During your work today, what were you most aware of?",
-    "options": [
-      { "text": "How my work was helping things move forward", "signal": "axis2:contribution" },
-      { "text": "Whether my effort was being noticed or valued", "signal": "axis2:entitlement" },
-      { "text": "What needed to get done next", "signal": "axis2:contribution" },
-      { "text": "How much was being asked compared to what I expected", "signal": "axis2:entitlement" }
-    ],
-    "next": "q2_2"
-  },
-  {
-    "id": "q2_2",
-    "type": "question",
-    "text": "Think about a moment involving others today. What describes you best?",
-    "options": [
-      { "text": "I stepped in to help where I could", "signal": "axis2:contribution" },
-      { "text": "I felt others weren’t doing enough", "signal": "axis2:entitlement" },
-      { "text": "I focused on completing my part well", "signal": "axis2:contribution" },
-      { "text": "I expected things to be clearer or easier", "signal": "axis2:entitlement" }
-    ],
-    "next": "dec_axis2"
-  },
-  {
-    "id": "dec_axis2",
-    "type": "decision",
-    "rules": [
-      {
-        "condition": "axis2:contribution >= axis2:entitlement",
-        "next": "ref2_cont"
-      },
-      {
-        "condition": "default",
-        "next": "ref2_ent"
-      }
-    ]
-  },
-  {
-    "id": "ref2_cont",
-    "type": "reflection",
-    "text": "You seemed focused on contributing and moving things forward. That orientation often builds momentum not just for you, but for everyone around you.",
-    "next": "bridge_3"
-  },
-  {
-    "id": "ref2_ent",
-    "type": "reflection",
-    "text": "It seems like expectations and what should have happened stood out to you today. That’s natural — noticing it is the first step to shifting how you engage.",
-    "next": "bridge_3"
-  },
-
-  {
-    "id": "bridge_3",
-    "type": "bridge",
-    "text": "Finally, let’s zoom out a bit and look at where your attention was directed.",
-    "next": "q3_1"
-  },
-
-  {
-    "id": "q3_1",
-    "type": "question",
-    "text": "When making decisions today, what influenced you the most?",
-    "options": [
-      { "text": "How it affected my own workload", "signal": "axis3:self" },
-      { "text": "How it would impact the team or outcome", "signal": "axis3:others" },
-      { "text": "Balancing my tasks with team needs", "signal": "axis3:others" },
-      { "text": "Getting through my responsibilities efficiently", "signal": "axis3:self" }
-    ],
-    "next": "q3_2"
-  },
-  {
-    "id": "q3_2",
-    "type": "question",
-    "text": "If someone needed your time today, how did you respond?",
-    "options": [
-      { "text": "I focused on my priorities first", "signal": "axis3:self" },
-      { "text": "I tried to understand and support them", "signal": "axis3:others" },
-      { "text": "I helped quickly but stayed task-focused", "signal": "axis3:self" },
-      { "text": "I adjusted my plans to accommodate them", "signal": "axis3:others" }
-    ],
-    "next": "dec_axis3"
-  },
-  {
-    "id": "dec_axis3",
-    "type": "decision",
-    "rules": [
-      {
-        "condition": "axis3:others >= axis3:self",
-        "next": "ref3_oth"
-      },
-      {
-        "condition": "default",
-        "next": "ref3_self"
-      }
-    ]
-  },
-  {
-    "id": "ref3_oth",
-    "type": "reflection",
-    "text": "You kept a broader perspective today, considering others alongside your own work. That kind of awareness often creates stronger outcomes over time.",
-    "next": "summary_node"
-  },
-  {
-    "id": "ref3_self",
-    "type": "reflection",
-    "text": "Your focus stayed close to your own responsibilities today. That can be necessary, especially on demanding days — it helps you stay grounded and move forward.",
-    "next": "summary_node"
-  },
-
-  {
-    "id": "summary_node",
-    "type": "summary",
-    "text": "Today, you leaned {axis1.dominant} in how you handled control, {axis2.dominant} in how you approached contribution, and {axis3.dominant} in how broadly you considered others. These patterns shape your days more than the events themselves.",
-    "next": "end_node"
-  },
-  {
-    "id": "end_node",
-    "type": "end",
-    "text": "That’s it for today. Take the insight with you — see you tomorrow.",
-    "next": null
-  }
+    {
+        "id": "start",
+        "type": "start",
+        "text": "Good evening. Let’s take a few minutes to reflect on your day.",
+        "next": "q_intro"
+    },
+    {
+        "id": "q_intro",
+        "type": "question",
+        "text": "When you think about today, what stands out most?",
+        "options": [
+            {
+                "text": "Productive",
+                "signal": "mood:high"
+            },
+            {
+                "text": "Challenging",
+                "signal": "mood:low"
+            },
+            {
+                "text": "Mixed",
+                "signal": "mood:neutral"
+            },
+            {
+                "text": "Frustrating",
+                "signal": "mood:low"
+            }
+        ],
+        "next": "bridge_1"
+    },
+    {
+        "id": "bridge_1",
+        "type": "bridge",
+        "text": "Let’s start by looking at how you handled what came your way today.",
+        "next": "q1_1"
+    },
+    {
+        "id": "q1_1",
+        "type": "question",
+        "text": "When something didn’t go as expected, what was your first instinct?",
+        "options": [
+            {
+                "text": "Figure out what I could adjust",
+                "signal": "axis1:internal"
+            },
+            {
+                "text": "Wait and see how things unfold",
+                "signal": "axis1:external"
+            },
+            {
+                "text": "Feel frustrated by the situation",
+                "signal": "axis1:external"
+            },
+            {
+                "text": "Look for another way forward",
+                "signal": "axis1:internal"
+            }
+        ],
+        "next": "q1_2"
+    },
+    {
+        "id": "q1_2",
+        "type": "question",
+        "text": "Thinking about your main task today, what shaped the outcome the most?",
+        "options": [
+            {
+                "text": "The choices and effort I put in",
+                "signal": "axis1:internal"
+            },
+            {
+                "text": "Changes in priorities or circumstances",
+                "signal": "axis1:external"
+            },
+            {
+                "text": "A mix, but I drove what I could",
+                "signal": "axis1:internal"
+            },
+            {
+                "text": "Dependence on others or delays",
+                "signal": "axis1:external"
+            }
+        ],
+        "next": "dec_axis1"
+    },
+    {
+        "id": "dec_axis1",
+        "type": "decision",
+        "rules": [
+            {
+                "condition": "axis1:internal >= axis1:external",
+                "next": "ref1_int"
+            },
+            {
+                "condition": "default",
+                "next": "ref1_ext"
+            }
+        ]
+    },
+    {
+        "id": "ref1_int",
+        "type": "reflection",
+        "text": "You described today as '{q_intro.answer}'. Even with that, you stayed engaged with what you could influence. That ability to act within constraints is what builds real progress.",
+        "next": "bridge_2"
+    },
+    {
+        "id": "ref1_ext",
+        "type": "reflection",
+        "text": "You described today as '{q_intro.answer}'. It seems like a lot felt outside your control. Even then, there were small decisions you made along the way — those are worth noticing.",
+        "next": "bridge_2"
+    },
+    {
+        "id": "bridge_2",
+        "type": "bridge",
+        "text": "Now that you’ve looked at how you handled things, let’s shift to what you brought into the work itself.",
+        "next": "q2_1"
+    },
+    {
+        "id": "q2_1",
+        "type": "question",
+        "text": "During your work today, what were you most aware of?",
+        "options": [
+            {
+                "text": "How my work was helping things move forward",
+                "signal": "axis2:contribution"
+            },
+            {
+                "text": "Whether my effort was being noticed or valued",
+                "signal": "axis2:entitlement"
+            },
+            {
+                "text": "What needed to get done next",
+                "signal": "axis2:contribution"
+            },
+            {
+                "text": "How much was being asked compared to what I expected",
+                "signal": "axis2:entitlement"
+            }
+        ],
+        "next": "q2_2"
+    },
+    {
+        "id": "q2_2",
+        "type": "question",
+        "text": "Think about a moment involving others today. What describes you best?",
+        "options": [
+            {
+                "text": "I stepped in to help where I could",
+                "signal": "axis2:contribution"
+            },
+            {
+                "text": "I felt others weren’t doing enough",
+                "signal": "axis2:entitlement"
+            },
+            {
+                "text": "I focused on completing my part well",
+                "signal": "axis2:contribution"
+            },
+            {
+                "text": "I expected things to be clearer or easier",
+                "signal": "axis2:entitlement"
+            }
+        ],
+        "next": "dec_axis2"
+    },
+    {
+        "id": "dec_axis2",
+        "type": "decision",
+        "rules": [
+            {
+                "condition": "axis2:contribution >= axis2:entitlement",
+                "next": "ref2_cont"
+            },
+            {
+                "condition": "default",
+                "next": "ref2_ent"
+            }
+        ]
+    },
+    {
+        "id": "ref2_cont",
+        "type": "reflection",
+        "text": "You seemed focused on contributing and moving things forward. That orientation often builds momentum not just for you, but for everyone around you.",
+        "next": "bridge_3"
+    },
+    {
+        "id": "ref2_ent",
+        "type": "reflection",
+        "text": "It seems like expectations and what should have happened stood out to you today. That’s natural — noticing it is the first step to shifting how you engage.",
+        "next": "bridge_3"
+    },
+    {
+        "id": "bridge_3",
+        "type": "bridge",
+        "text": "Finally, let’s zoom out a bit and look at where your attention was directed.",
+        "next": "q3_1"
+    },
+    {
+        "id": "q3_1",
+        "type": "question",
+        "text": "When making decisions today, what influenced you the most?",
+        "options": [
+            {
+                "text": "How it affected my own workload",
+                "signal": "axis3:self"
+            },
+            {
+                "text": "How it would impact the team or outcome",
+                "signal": "axis3:others"
+            },
+            {
+                "text": "Balancing my tasks with team needs",
+                "signal": "axis3:others"
+            },
+            {
+                "text": "Getting through my responsibilities efficiently",
+                "signal": "axis3:self"
+            }
+        ],
+        "next": "q3_2"
+    },
+    {
+        "id": "q3_2",
+        "type": "question",
+        "text": "If someone needed your time today, how did you respond?",
+        "options": [
+            {
+                "text": "I focused on my priorities first",
+                "signal": "axis3:self"
+            },
+            {
+                "text": "I tried to understand and support them",
+                "signal": "axis3:others"
+            },
+            {
+                "text": "I helped quickly but stayed task-focused",
+                "signal": "axis3:self"
+            },
+            {
+                "text": "I adjusted my plans to accommodate them",
+                "signal": "axis3:others"
+            }
+        ],
+        "next": "dec_axis3"
+    },
+    {
+        "id": "dec_axis3",
+        "type": "decision",
+        "rules": [
+            {
+                "condition": "axis3:others >= axis3:self",
+                "next": "ref3_oth"
+            },
+            {
+                "condition": "default",
+                "next": "ref3_self"
+            }
+        ]
+    },
+    {
+        "id": "ref3_oth",
+        "type": "reflection",
+        "text": "You kept a broader perspective today, considering others alongside your own work. That kind of awareness often creates stronger outcomes over time.",
+        "next": "summary_node"
+    },
+    {
+        "id": "ref3_self",
+        "type": "reflection",
+        "text": "Your focus stayed close to your own responsibilities today. That can be necessary, especially on demanding days — it helps you stay grounded and move forward.",
+        "next": "summary_node"
+    },
+    {
+        "id": "summary_node",
+        "type": "summary",
+        "text": "Today, you leaned {axis1.dominant} in how you handled control, {axis2.dominant} in how you approached contribution, and {axis3.dominant} in how broadly you considered others. These patterns shape your days more than the events themselves.",
+        "next": "end_node"
+    },
+    {
+        "id": "end_node",
+        "type": "end",
+        "text": "That’s it for today. Take the insight with you — see you tomorrow.",
+        "next": null
+    }
 ]
